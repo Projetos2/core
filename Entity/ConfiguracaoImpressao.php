@@ -68,7 +68,7 @@ class ConfiguracaoImpressao implements \JsonSerializable
         $this->exibirNomeServico     = true;
         $this->exibirNomeUnidade     = true;
         $this->exibirPrioridade      = true;
-        $this->exibirID              = false;
+        $this->exibirID              = true;
     }
     
     public function getExibirID()
