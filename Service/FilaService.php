@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* teste comentário
  * This file is part of the Novo SGA project.
  *
  * (c) Rogerio Lino <rogeriolino@gmail.com>
