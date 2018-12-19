@@ -53,6 +53,11 @@ class ConfiguracaoImpressao implements \JsonSerializable
      */
     private $exibirPrioridade;
     
+     /**
+     * @var bool
+     */
+    private $exibirID;
+    
     public function __construct(Unidade $unidade)
     {
         $this->unidade    = $unidade;
@@ -63,6 +68,12 @@ class ConfiguracaoImpressao implements \JsonSerializable
         $this->exibirNomeServico     = true;
         $this->exibirNomeUnidade     = true;
         $this->exibirPrioridade      = true;
+        $this->exibirID              = false;
+    }
+    
+    public function getExibirID()
+    {
+        return $this->unidade;
     }
     
     public function getUnidade()
@@ -103,6 +114,12 @@ class ConfiguracaoImpressao implements \JsonSerializable
     public function getExibirPrioridade()
     {
         return $this->exibirPrioridade;
+    }
+    
+    public function setExibirID($exibirID)
+    {
+        $this->exibirID = $exibirID;
+        return $this;
     }
 
     public function setUnidade(Unidade $unidade)
@@ -163,6 +180,7 @@ class ConfiguracaoImpressao implements \JsonSerializable
             'exibirNomeUnidade'     => $this->getExibirNomeUnidade(),
             'exibirNomeServico'     => $this->getExibirNomeServico(),
             'exibirMensagemServico' => $this->getExibirMensagemServico(),
+            'exibirID'              => $this->getExibirID(),
         ];
     }
 }
