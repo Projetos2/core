@@ -59,7 +59,8 @@ class FilaService extends StorageAwareService
         Usuario $usuario,
         array $servicosUsuario,
         $tipoFila = self::TIPO_TODOS,
-        $maxResults = 0
+        $maxResults = 0,
+        $idAtendimento = 0
     ) {
         $ids = [];
         foreach ($servicosUsuario as $servico) {
@@ -83,7 +84,8 @@ class FilaService extends StorageAwareService
             ->andWhere('(atendimento.usuario IS NULL OR atendimento.usuario = :usuario)')
             ->andWhere('atendimento.status = :status')
             ->andWhere('atendimento.unidade = :unidade')
-            ->andWhere('servico.id IN (:servicos)');
+            ->andWhere('servico.id IN (:servicos)')
+            ->andWhere('(atendimento.id = :idAtendimento OR :idAtendimento = 0)');
         
         // se nao atende todos, filtra pelo tipo de atendimento
         switch ($tipoFila) {
@@ -102,7 +104,8 @@ class FilaService extends StorageAwareService
             'status'   => AtendimentoService::SENHA_EMITIDA,
             'unidade'  => $unidade,
             'usuario'  => $usuario,
-            'servicos' => $ids
+            'servicos' => $ids,
+            'idAtendimento' => $idAtendimento
         ];
         
         $this->applyOrders($builder, $unidade, $usuario);
