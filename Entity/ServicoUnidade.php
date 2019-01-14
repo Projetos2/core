@@ -78,6 +78,11 @@ class ServicoUnidade implements \JsonSerializable
      * @var string
      */
     private $mensagem;
+    
+     /**
+     * @var bool
+     */
+    private $ehDestaque;
 
     public function __construct()
     {
@@ -184,6 +189,11 @@ class ServicoUnidade implements \JsonSerializable
     {
         return $this->numeroFinal;
     }
+    
+    public function getEhDestaque()
+    {
+        return $this->ehDestaque;
+    }
 
     public function setPrioridade($prioridade)
     {
@@ -209,6 +219,12 @@ class ServicoUnidade implements \JsonSerializable
         return $this;
     }
 
+    public function setEhDestaque($ehDestaque)
+    {
+        $this->ehDestaque = $ehDestaque;
+        return $this;
+    }
+    
     public function getMensagem()
     {
         return $this->mensagem;
@@ -238,7 +254,8 @@ class ServicoUnidade implements \JsonSerializable
             'mensagem'      => $this->getMensagem(),
             'numeroInicial' => $this->getNumeroInicial(),
             'numeroFinal'   => $this->getNumeroFinal(),
-            'incremento'    => $this->getIncremento()
+            'incremento'    => $this->getIncremento(),
+            'ehDestaque'   => $this->getEhDestaque(),
         ];
     }
 }
