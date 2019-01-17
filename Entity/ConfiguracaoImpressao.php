@@ -73,7 +73,7 @@ class ConfiguracaoImpressao implements \JsonSerializable
     
     public function getExibirId()
     {
-        return $this->unidade;
+        return $this->exibirId;
     }
     
     public function getUnidade()
