@@ -245,7 +245,7 @@ class AtendimentoService extends StorageAwareService
             ->leftJoin('e.usuario', 'u')
             ->where(':numero = 0 OR e.senha.numero = :numero')
             ->andWhere('e.unidade = :unidade')
-            ->orderBy('e.id', 'ASC')
+            ->orderBy('e.id', 'DESC')
             ->setParameters([
                 'numero'  => $numero,
                 'unidade' => $unidade->getId(),
