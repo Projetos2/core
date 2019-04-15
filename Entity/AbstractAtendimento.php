@@ -100,6 +100,11 @@ abstract class AbstractAtendimento implements \JsonSerializable
      * @var int
      */
     private $tempoDeslocamento;
+    
+    /**
+     * @var int
+     */
+    private $estimativaTempoEspera;
 
     /**
      * @var string
@@ -424,6 +429,12 @@ abstract class AbstractAtendimento implements \JsonSerializable
         $this->tempoDeslocamento = $this->dateIntervalToSeconds($tempoDeslocamento);
         return $this;
     }
+    
+     public function setEstimativaTempoEspera(\DateInterval $estimativaTempoEspera)
+    {
+        $this->estimativaTempoEspera = $this->dateIntervalToSeconds($estimativaTempoEspera);
+        return $this;
+    }
 
     /**
      * Retorna o tempo de deslocamento do cliente.
@@ -443,6 +454,12 @@ abstract class AbstractAtendimento implements \JsonSerializable
         }
 
         return $interval;
+    }
+    
+    public function getEstimativaTempoEspera(){
+         if ($this->estimativaTempoEspera) {
+            return $this->secondsToDateInterval($this->estimativaTempoEspera);
+        }
     }
 
     /**
