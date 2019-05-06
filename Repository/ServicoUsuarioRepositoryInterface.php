@@ -13,6 +13,7 @@ namespace Novosga\Repository;
 
 use Novosga\Entity\Usuario;
 use Novosga\Entity\Unidade;
+use Novosga\Entity\Servico;
 use Novosga\Entity\ServicoUsuario;
 use Doctrine\Common\Persistence\ObjectRepository;
 
@@ -37,7 +38,7 @@ interface ServicoUsuarioRepositoryInterface extends ObjectRepository
      * @param Usuario|int $usuario
      * @param Unidade|int $unidade
      * @param Servico|int $servico
-     * @return ServicoUnidade|null
+     * @return ServicoUsuario|null
      */
     public function get($usuario, $unidade, $servico);
 }

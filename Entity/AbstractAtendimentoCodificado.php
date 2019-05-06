@@ -29,18 +29,20 @@ abstract class AbstractAtendimentoCodificado
      */
     protected $peso;
 
-    abstract public function getAtendimento();
+    abstract public function getAtendimento(): AbstractAtendimento;
 
-    abstract public function setAtendimento(AbstractAtendimento $atendimento);
+    abstract public function setAtendimento(AbstractAtendimento $atendimento): self;
 
     public function getServico()
     {
         return $this->servico;
     }
 
-    public function setServico($servico)
+    public function setServico($servico): self
     {
         $this->servico = $servico;
+
+        return $this;
     }
 
     public function getPeso()
@@ -48,8 +50,10 @@ abstract class AbstractAtendimentoCodificado
         return $this->peso;
     }
 
-    public function setPeso($peso)
+    public function setPeso($peso): self
     {
         $this->peso = $peso;
+
+        return $this;
     }
 }

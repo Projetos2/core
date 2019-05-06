@@ -11,6 +11,8 @@
 
 namespace Novosga\Entity;
 
+use DateTime;
+use DateInterval;
 use Novosga\Entity\Cliente;
 use Novosga\Entity\Senha;
 
@@ -47,9 +49,14 @@ abstract class AbstractAtendimento implements \JsonSerializable
     protected $usuarioTriagem;
 
     /**
-     * @var int
+     * @var Local
      */
     protected $local;
+
+    /**
+     * @var int
+     */
+    protected $numeroLocal;
 
     /**
      * @var Prioridade
@@ -147,78 +154,91 @@ abstract class AbstractAtendimento implements \JsonSerializable
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): self
     {
         $this->id = $id;
+
         return $this;
     }
     
-    public function getUnidade()
+    public function getUnidade(): ?Unidade
     {
         return $this->unidade;
     }
 
-    public function setUnidade($unidade)
+    public function setUnidade(?Unidade $unidade): self
     {
         $this->unidade = $unidade;
 
         return $this;
     }
 
-    public function getServico()
+    public function getServico(): ?Servico
     {
         return $this->servico;
     }
 
-    public function setServico($servico)
+    public function setServico(?Servico $servico): self
     {
         $this->servico = $servico;
 
         return $this;
     }
 
-    public function getUsuario()
+    public function getUsuario(): ?Usuario
     {
         return $this->usuario;
     }
 
-    public function setUsuario($usuario)
+    public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
 
         return $this;
     }
 
-    public function setUsuarioTriagem(Usuario $usuario)
+    public function setUsuarioTriagem(?Usuario $usuario): self
     {
         $this->usuarioTriagem = $usuario;
 
         return $this;
     }
 
-    public function getUsuarioTriagem()
+    public function getUsuarioTriagem(): ?Usuario
     {
         return $this->usuarioTriagem;
     }
 
-    public function getLocal()
+    public function getLocal(): ?Local
     {
         return $this->local;
     }
 
-    public function setLocal($local)
+    public function getNumeroLocal(): ?int
+    {
+        return $this->numeroLocal;
+    }
+
+    public function setLocal(?Local $local): self
     {
         $this->local = $local;
 
         return $this;
     }
+
+    public function setNumeroLocal(?int $numeroLocal): self
+    {
+        $this->numeroLocal = $numeroLocal;
+
+        return $this;
+    }
     
-    public function getDataAgendamento()
+    public function getDataAgendamento(): ?DateTime
     {
         return $this->dataAgendamento;
     }
 
-    public function setDataAgendamento(\DateTime $dataAgendamento = null)
+    public function setDataAgendamento(?DateTime $dataAgendamento): self
     {
         $this->dataAgendamento = $dataAgendamento;
         
@@ -226,14 +246,14 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDataChegada()
+    public function getDataChegada(): ?DateTime
     {
         return $this->dataChegada;
     }
 
-    public function setDataChegada(\DateTime $dataChegada = null)
+    public function setDataChegada(?DateTime $dataChegada): self
     {
         $this->dataChegada = $dataChegada;
 
@@ -241,14 +261,14 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDataChamada()
+    public function getDataChamada(): ?DateTime
     {
         return $this->dataChamada;
     }
 
-    public function setDataChamada(\DateTime $dataChamada = null)
+    public function setDataChamada(?DateTime $dataChamada): self
     {
         $this->dataChamada = $dataChamada;
 
@@ -256,14 +276,14 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDataInicio()
+    public function getDataInicio(): ?DateTime
     {
         return $this->dataInicio;
     }
 
-    public function setDataInicio(\DateTime $dataInicio = null)
+    public function setDataInicio(?DateTime $dataInicio): self
     {
         $this->dataInicio = $dataInicio;
 
@@ -271,14 +291,14 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDataFim()
+    public function getDataFim(): ?DateTime
     {
         return $this->dataFim;
     }
 
-    public function setDataFim(\DateTime $dataFim = null)
+    public function setDataFim(?DateTime $dataFim): self
     {
         $this->dataFim = $dataFim;
 
@@ -290,7 +310,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
         return $this->status;
     }
     
-    public function setStatus($status)
+    public function setStatus($status): self
     {
         $this->status = $status;
 
@@ -302,25 +322,26 @@ abstract class AbstractAtendimento implements \JsonSerializable
         return $this->resolucao;
     }
 
-    public function setResolucao($resolucao)
+    public function setResolucao($resolucao): self
     {
         $this->resolucao = $resolucao;
         
         return $this;
     }
         
-    public function setCliente(Cliente $cliente)
+    public function setCliente(Cliente $cliente): self
     {
         $this->cliente = $cliente;
+
         return $this;
     }
     
-    public function getPai()
+    public function getPai(): ?self
     {
         return $this->pai;
     }
 
-    public function setPai($pai)
+    public function setPai(?self $pai): self
     {
         $this->pai = $pai;
 
@@ -328,12 +349,13 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
     
     /**
-     * @param \DateInterval $tempoEspera
+     * @param DateInterval $tempoEspera
      * @return $this
      */
-    public function setTempoEspera(\DateInterval $tempoEspera)
+    public function setTempoEspera(DateInterval $tempoEspera): self
     {
         $this->tempoEspera = $this->dateIntervalToSeconds($tempoEspera);
+
         return $this;
     }
 
@@ -341,7 +363,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
      * Retorna o tempo de espera do cliente até ser atendido.
      * A diferença entre a data de chegada até a data de chamada (ou atual).
      *
-     * @return \DateInterval
+     * @return DateInterval
      */
     public function getTempoEspera()
     {
@@ -349,19 +371,20 @@ abstract class AbstractAtendimento implements \JsonSerializable
             return $this->secondsToDateInterval($this->tempoEspera);
         }
         
-        $now = new \DateTime();
+        $now = new DateTime();
         $interval = $now->diff($this->getDataChegada());
 
         return $interval;
     }
     
     /**
-     * @param \DateInterval $tempoPermanencia
+     * @param DateInterval $tempoPermanencia
      * @return $this
      */
-    public function setTempoPermanencia(\DateInterval $tempoPermanencia)
+    public function setTempoPermanencia(DateInterval $tempoPermanencia): self
     {
         $this->tempoPermanencia = $this->dateIntervalToSeconds($tempoPermanencia);
+
         return $this;
     }
     
@@ -369,7 +392,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
      * Retorna o tempo de permanência do cliente na unidade.
      * A diferença entre a data de chegada até a data de fim de atendimento.
      *
-     * @return \DateInterval
+     * @return DateInterval
      */
     public function getTempoPermanencia()
     {
@@ -377,7 +400,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
             return $this->secondsToDateInterval($this->tempoPermanencia);
         }
         
-        $interval = new \DateInterval('P0M');
+        $interval = new DateInterval('P0M');
         if ($this->getDataFim()) {
             $interval = $this->getDataFim()->diff($this->getDataChegada());
         }
@@ -386,10 +409,10 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
     
     /**
-     * @param \DateInterval $tempoAtendimento
+     * @param DateInterval $tempoAtendimento
      * @return $this
      */
-    public function setTempoAtendimento(\DateInterval $tempoAtendimento = null)
+    public function setTempoAtendimento(DateInterval $tempoAtendimento = null): self
     {
         if ($tempoAtendimento) {
             $this->tempoAtendimento = $this->dateIntervalToSeconds($tempoAtendimento);
@@ -404,7 +427,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
      * Retorna o tempo total do atendimento.
      * A diferença entre a data de início e fim do atendimento.
      *
-     * @return \DateInterval
+     * @return DateInterval
      */
     public function getTempoAtendimento()
     {
@@ -412,7 +435,7 @@ abstract class AbstractAtendimento implements \JsonSerializable
             return $this->secondsToDateInterval($this->tempoAtendimento);
         }
         
-        $interval = new \DateInterval('P0M');
+        $interval = new DateInterval('P0M');
         if ($this->getDataFim()) {
             $interval = $this->getDataFim()->diff($this->getDataInicio());
         }
@@ -421,12 +444,13 @@ abstract class AbstractAtendimento implements \JsonSerializable
     }
     
     /**
-     * @param \DateInterval $tempoEspera
+     * @param DateInterval $tempoEspera
      * @return $this
      */
-    public function setTempoDeslocamento(\DateInterval $tempoDeslocamento)
+    public function setTempoDeslocamento(DateInterval $tempoDeslocamento): self
     {
         $this->tempoDeslocamento = $this->dateIntervalToSeconds($tempoDeslocamento);
+
         return $this;
     }
     
@@ -483,9 +507,10 @@ abstract class AbstractAtendimento implements \JsonSerializable
         return $this->prioridade;
     }
 
-    public function setPrioridade(Prioridade $prioridade)
+    public function setPrioridade(Prioridade $prioridade): self
     {
         $this->prioridade = $prioridade;
+
         return $this;
     }
     
@@ -494,9 +519,10 @@ abstract class AbstractAtendimento implements \JsonSerializable
         return $this->observacao;
     }
 
-    public function setObservacao($observacao)
+    public function setObservacao($observacao): self
     {
         $this->observacao = $observacao;
+
         return $this;
     }
     
